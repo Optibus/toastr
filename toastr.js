@@ -37,7 +37,7 @@
                 warning: warning
             };
 
-            var previousToast;
+            var previousTitle, previousMessage;
 
             return toastr;
 
@@ -392,10 +392,11 @@
 
                 function shouldExit(options, map) {
                     if (options.preventDuplicates) {
-                        if (map.message === previousToast) {
+                        if (map.message === previousMessage && map.title === previousTitle) {
                             return true;
                         } else {
-                            previousToast = map.message;
+                            previousMessage = map.message;
+                            previousTitle = map.title;
                         }
                     }
                     return false;
@@ -461,7 +462,8 @@
                 $toastElement = null;
                 if ($container.children().length === 0) {
                     $container.remove();
-                    previousToast = undefined;
+                    previousMessage = undefined;
+                    previousTitle = undefined;
                 }
             }
 
